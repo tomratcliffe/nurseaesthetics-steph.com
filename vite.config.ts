@@ -1,14 +1,11 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { optimiseImages } from './plugins/optimise-images.ts';
 
-// The root base is for `npm run dev` only. The production build is served
-// from the GitHub Pages project path, so `npm run build` passes
-// --base=/nurseaesthetics-steph.com/ (see package.json). Drop that flag from
-// the build and preview scripts once the custom domain is live, at which
-// point the site is served from the root again.
+// Served from the custom domain at the root, so the base path stays at "/".
 export default defineConfig({
   base: '/',
-  plugins: [react()],
+  plugins: [react(), optimiseImages()],
   // Listen on all interfaces so phones and tablets on the same network can
   // load the site for real-device testing.
   server: { host: true },

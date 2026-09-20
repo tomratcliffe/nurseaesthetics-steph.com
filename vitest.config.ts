@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from 'vitest/config';
-import viteConfig from './vite.config';
+import viteConfig from './vite.config.ts';
 
 // Reuses the app's Vite config, so image and CSS-module imports resolve in
 // tests exactly as they do in the build. Kept separate from vite.config.ts so
