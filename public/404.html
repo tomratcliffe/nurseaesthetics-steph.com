@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <script>
+      // GitHub Pages has no server-side rewrite, so a direct hit on /treatments
+      // lands here. Stash the requested URL and bounce to the SPA entry point,
+      // where the snippet in index.html restores it before React mounts.
+      sessionStorage.redirect = location.href;
+      location.replace(location.origin);
+    </script>
+  </head>
+  <body></body>
+</html>

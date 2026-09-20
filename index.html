@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Nurse Aesthetics with Steph</title>
+    <meta
+      name="description"
+      content="Nurse-led aesthetic and clinical skincare treatments, delivered with a considered, medical approach."
+    />
+    <meta name="theme-color" content="#fbf8f3" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nurse Aesthetics with Steph" />
+    <meta property="og:title" content="Nurse Aesthetics with Steph" />
+    <meta
+      property="og:description"
+      content="Nurse-led aesthetic and clinical skincare treatments, delivered with a considered, medical approach."
+    />
+    <meta property="og:url" content="https://nurseaesthetics-steph.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap"
+    />
+
+    <script>
+      // Restores the path stashed by public/404.html so that deep links such as
+      // /treatments survive a hard refresh on GitHub Pages. See README.
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, '', redirect);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
