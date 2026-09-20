@@ -1,0 +1,204 @@
+/* Stacked on mobile; the photo moves alongside the copy once there is room. */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+/* The copy and its call to action, which needs air between them. */
+.introText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.treatment {
+  scroll-margin-top: 6rem;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--colour-rule);
+}
+
+.summary {
+  max-width: 40ch;
+  margin-bottom: var(--space-sm);
+  color: var(--colour-espresso);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.4;
+}
+
+/* The photo sits under the treatment name, in the left column's empty space
+   on desktop and between the name and the copy on mobile. Capped in width so
+   a portrait crop does not run away with the page height. */
+.aside {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stacked, the photo leads and the name sits beneath it. */
+.media {
+  order: -1;
+  margin-bottom: var(--space-md);
+}
+
+/* Product shots sit under the treatment name, in the left column on desktop
+   and above the copy on mobile. */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product {
+  width: 5.5rem;
+}
+
+.productImage {
+  width: 100%;
+  aspect-ratio: 1;
+  /* contain, not cover: packaging should not be cropped. */
+  object-fit: contain;
+  padding: var(--space-2xs);
+  border: 1px solid var(--colour-rule);
+  border-radius: var(--radius);
+  background-color: var(--colour-paper);
+}
+
+.productName {
+  display: block;
+  margin-top: var(--space-2xs);
+  color: var(--colour-taupe);
+  font-size: var(--text-micro);
+  letter-spacing: 0.04em;
+}
+
+.body {
+  margin-top: var(--space-md);
+}
+
+.body > * + * {
+  margin-top: var(--space-sm);
+}
+
+.meta {
+  max-width: var(--measure);
+  margin-top: var(--space-md);
+  color: var(--colour-espresso);
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+/* A list inside the treatment copy. A hairline dash rather than a bullet,
+   matching the aftercare page and the menu sub-items. */
+.points {
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: var(--measure);
+}
+
+.points li {
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.points li + li {
+  margin-top: var(--space-2xs);
+}
+
+.points li::before {
+  content: "";
+  position: absolute;
+  top: 0.85em;
+  left: 0;
+  width: 1.25rem;
+  height: 1px;
+  background-color: var(--colour-rule-strong);
+}
+
+/* Sits directly beneath the uppercase tagline, in sentence case: too long a
+   sentence to set in caps alongside the appointment length. */
+.downtime {
+  max-width: var(--measure);
+  color: var(--colour-taupe);
+  font-size: var(--text-micro);
+  line-height: 1.7;
+}
+
+.body > .meta + .downtime {
+  margin-top: var(--space-2xs);
+}
+
+.cta {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--colour-rule);
+}
+
+@media (min-width: 52em) {
+  .intro {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  /* The photo keeps its shape; the copy gives up the width. */
+  .introPhoto {
+    flex-shrink: 0;
+    width: 45%;
+    max-width: 26rem;
+  }
+
+  .treatment {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: var(--space-md);
+  }
+
+  /* Every other treatment mirrors, putting its photo on the right. */
+  .reversed {
+    grid-template-columns: 6fr 5fr;
+  }
+
+  .reversed .aside {
+    order: 2;
+    text-align: right;
+  }
+
+  .reversed .media {
+    margin-left: auto;
+  }
+
+  .reversed .products {
+    justify-content: flex-end;
+  }
+
+  /* Side by side, the columns carry the gap themselves. */
+  .body {
+    margin-top: 0;
+  }
+
+  /* Back under the heading once the photo has its own column. */
+  .media {
+    order: 0;
+    max-width: 20rem;
+    margin-top: var(--space-md);
+    margin-bottom: 0;
+  }
+}
