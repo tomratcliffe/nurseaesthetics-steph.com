@@ -1,0 +1,68 @@
+.list {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.quote {
+  margin: 0;
+}
+
+.quoteStars {
+  margin-bottom: var(--space-xs);
+  color: var(--colour-espresso);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  line-height: 1;
+}
+
+.quote p {
+  max-width: var(--measure);
+  color: var(--colour-taupe);
+}
+
+.quote p + p {
+  margin-top: var(--space-xs);
+}
+
+.attribution {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--colour-taupe);
+  font-size: var(--text-micro);
+  font-style: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.more {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--colour-rule);
+  font-size: var(--text-small);
+  letter-spacing: 0.06em;
+}
+
+@media (min-width: 52em) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  /* From here there is room to set the first quote as a display pull-quote.
+     Below this width it stays identical to the other two. */
+  .lead {
+    grid-column: 1 / -1;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--colour-rule);
+  }
+
+  .lead p {
+    max-width: 28ch;
+    color: var(--colour-espresso);
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.4;
+  }
+}

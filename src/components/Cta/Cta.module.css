@@ -1,0 +1,44 @@
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 1.05rem 2.5rem;
+  border: 1px solid var(--colour-espresso);
+  border-radius: var(--radius);
+  background-color: var(--colour-espresso);
+  color: var(--colour-cream);
+  font-weight: var(--weight-label);
+  font-size: 0.82rem;
+  letter-spacing: var(--tracking-eyebrow);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background-color: transparent;
+  color: var(--colour-espresso);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--colour-espresso);
+}
+
+.outline:hover,
+.outline:focus-visible {
+  background-color: var(--colour-espresso);
+  color: var(--colour-cream);
+}
+
+.arrow {
+  display: block;
+  transition: transform var(--duration) var(--ease);
+}
+
+.cta:hover .arrow {
+  transform: translateX(0.25rem);
+}

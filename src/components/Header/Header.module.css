@@ -1,0 +1,105 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: var(--colour-paper);
+  border-bottom: 1px solid transparent;
+  /* The bar's own background is switched instantly, never faded: the overlay
+     sitting behind it is already fading cream in, and two stacked fades
+     composite to a different colour than one (the bar's cream weight goes as
+     the square of the overlay's, so it visibly lags). Delaying the restore by
+     the overlay's duration keeps the bar transparent until the overlay has
+     finished fading out on close. */
+  transition:
+    background-color 0s var(--ease) var(--duration),
+    border-color var(--duration) var(--ease);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  color: var(--colour-espresso);
+  text-decoration: none;
+}
+
+.scrolled {
+  border-bottom-color: var(--colour-rule);
+}
+
+/* While the overlay is open the bar goes transparent so the cream panel
+   reads as a single surface behind the close button. */
+.open {
+  background-color: transparent;
+  border-bottom-color: transparent;
+  /* Opening: drop the delay so the bar clears immediately. */
+  transition-delay: 0s;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: min(100% - 2 * var(--space-sm), var(--width-content));
+  margin-inline: auto;
+  min-height: var(--header-height);
+  padding-block: var(--space-2xs);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-2xs) 0;
+  border: 0;
+  background: none;
+  color: var(--colour-espresso);
+  cursor: pointer;
+  font-weight: var(--weight-label);
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.icon {
+  position: relative;
+  width: 28px;
+  height: 12px;
+}
+
+.icon span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentcolor;
+  transition:
+    transform var(--duration) var(--ease),
+    opacity var(--duration) var(--ease);
+}
+
+.icon span:nth-child(1) {
+  top: 0;
+}
+
+.icon span:nth-child(2) {
+  top: 11px;
+}
+
+.open .icon span:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.open .icon span:nth-child(2) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+@media (min-width: 40em) {
+  .inner {
+    width: min(100% - 2 * var(--space-lg), var(--width-content));
+  }
+
+  .trigger {
+    font-size: var(--text-small);
+  }
+}

@@ -1,0 +1,137 @@
+.figure {
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--colour-rule);
+  border-radius: var(--radius);
+  background-color: var(--colour-cream-wash);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* The "after" layer is revealed from the left edge to the split position. */
+.after {
+  clip-path: inset(0 0 0 var(--split));
+}
+
+.eased {
+  transition: clip-path var(--duration) var(--ease);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--colour-taupe);
+  font-weight: var(--weight-label);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.placeholderBefore {
+  background-color: var(--colour-cream-wash);
+}
+
+.placeholderAfter {
+  background-color: var(--colour-cream);
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split);
+  z-index: 2;
+  width: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.handle.eased {
+  transition: left var(--duration) var(--ease);
+}
+
+.handleLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: var(--colour-cream);
+  transform: translateX(-50%);
+}
+
+.handleGrip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--colour-cream);
+  border-radius: 50%;
+  background-color: var(--colour-cream);
+  color: var(--colour-espresso);
+  transform: translate(-50%, -50%);
+}
+
+.labels {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-xs);
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.label {
+  padding: 0.25rem 0.6rem;
+  background-color: var(--colour-cream);
+  color: var(--colour-espresso);
+}
+
+.caption {
+  margin-top: var(--space-sm);
+}
+
+.treatment {
+  display: block;
+  color: var(--colour-espresso);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h3);
+  letter-spacing: var(--tracking-display);
+}
+
+.captionText {
+  display: block;
+  margin-top: var(--space-2xs);
+  color: var(--colour-taupe);
+  font-size: var(--text-small);
+}

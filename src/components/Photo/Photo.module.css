@@ -1,0 +1,36 @@
+/*
+ * Shape and crop are driven by custom properties rather than props, so a
+ * caller can vary them responsively from its own stylesheet — set
+ * --photo-ratio, --photo-fit or --photo-radius on any ancestor.
+ */
+.photo {
+  width: 100%;
+  aspect-ratio: var(--photo-ratio, 4 / 5);
+  object-fit: var(--photo-fit, cover);
+  border-radius: var(--photo-radius, var(--radius-media));
+}
+
+/* The `ratio` prop. Set on the element itself, so it beats a --photo-ratio
+   inherited from an ancestor while still allowing a media query on the
+   caller's own class to override it. */
+.portrait {
+  --photo-ratio: 4 / 5;
+}
+
+.landscape {
+  --photo-ratio: 3 / 2;
+}
+
+/* Stands in until a real photograph is dropped in, so layout is final first. */
+.placeholder {
+  display: grid;
+  place-items: center;
+  padding: var(--space-md);
+  border: 1px solid var(--colour-rule);
+  background-color: var(--colour-cream-wash);
+  color: var(--colour-taupe);
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-eyebrow);
+  text-align: center;
+  text-transform: uppercase;
+}

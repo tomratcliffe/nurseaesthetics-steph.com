@@ -1,0 +1,7 @@
+.intro {
+  max-width: var(--measure);
+}
+
+.intro p + p {
+  margin-top: var(--space-sm);
+}

@@ -1,0 +1,150 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  background-color: var(--colour-cream);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--duration) var(--ease),
+    visibility var(--duration) var(--ease);
+}
+
+.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Masks the strip behind the transparent header, so the scrolling list cannot
+   run up underneath the logo and close button. It lives inside the overlay
+   rather than on the header itself so it fades with the panel as one surface:
+   giving the header its own cream background would switch it instantly while
+   the overlay was still fading, which is the mismatch the header's transition
+   comment describes. Cream on cream, so it is invisible until it occludes. */
+.overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: var(--header-height);
+  background-color: var(--colour-cream);
+}
+
+.inner {
+  width: min(100% - 2 * var(--space-sm), var(--width-content));
+  max-height: 100%;
+  margin-inline: auto;
+  padding-block: 6rem var(--space-lg);
+  overflow-y: auto;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item + .item {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--colour-rule);
+}
+
+.primary {
+  display: inline-block;
+  color: var(--colour-espresso);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h2);
+  letter-spacing: var(--tracking-display);
+  text-decoration: none;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.primary:hover {
+  opacity: 0.62;
+}
+
+.children {
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.child + .child {
+  margin-top: var(--space-2xs);
+}
+
+.childLink {
+  display: inline-block;
+  color: var(--colour-taupe);
+  font-size: var(--text-body);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+
+.childLink::before {
+  content: '';
+  display: inline-block;
+  width: 1.25rem;
+  height: 1px;
+  margin-right: var(--space-xs);
+  vertical-align: middle;
+  background-color: var(--colour-rule-strong);
+  transition: width var(--duration) var(--ease);
+}
+
+.childLink:hover,
+.childLink:focus-visible {
+  color: var(--colour-espresso);
+}
+
+.childLink:hover::before {
+  width: 2.25rem;
+}
+
+.cta {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--colour-rule);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
+  color: var(--colour-taupe);
+  font-size: var(--text-small);
+}
+
+/* Icon-only, so the link is padded out to a comfortable touch target. */
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -0.75rem;
+  color: var(--colour-espresso);
+  transition: opacity var(--duration) var(--ease);
+}
+
+.social:hover {
+  opacity: 0.62;
+}
+
+@media (min-width: 40em) {
+  .inner {
+    width: min(100% - 2 * var(--space-lg), var(--width-content));
+  }
+
+  .primary {
+    font-size: var(--text-h1);
+  }
+}
