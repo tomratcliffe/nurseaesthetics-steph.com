@@ -70,11 +70,6 @@
   font-style: normal;
 }
 
-.address a {
-  display: inline-block;
-  text-decoration-color: rgb(239 220 196 / 45%);
-}
-
 .address span {
   display: block;
 }

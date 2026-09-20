@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Analytics } from './components/Analytics';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { ScrollToAnchor } from './components/ScrollToAnchor';
@@ -14,6 +15,7 @@ export function App() {
         Skip to content
       </a>
       <ScrollToAnchor />
+      <Analytics />
       <Header />
       <main id="main">
         <Routes>

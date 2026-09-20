@@ -7,14 +7,6 @@ import wellnessStudioPhoto from "../../assets/wellness-studio.jpg";
 import { Photo } from "../Photo/Photo";
 
 export function Footer() {
-  // Falls back to a Maps search for the address, so the link keeps working
-  // whether or not a specific place URL is set.
-  const mapsUrl =
-    footer.mapsUrl ??
-    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      footer.address.join(", ")
-    )}`;
-
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -39,14 +31,9 @@ export function Footer() {
               </li>
               <li>
                 <address className={styles.address}>
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                    {footer.address.map((line) => (
-                      <span key={line}>{line}</span>
-                    ))}
-                    <span className="visually-hidden">
-                      (opens Google Maps in a new tab)
-                    </span>
-                  </a>
+                  {footer.address.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
                 </address>
               </li>
             </ul>

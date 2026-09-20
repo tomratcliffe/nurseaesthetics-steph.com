@@ -1,20 +1,3 @@
-/**
- * Every piece of copy, every link and every image reference on the site lives
- * in this file. Components read from it and contain no wording of their own,
- * so the site can be updated without touching any React code.
- *
- * Anything marked TODO is placeholder text waiting on real content.
- *
- * Photos: drop the file into src/assets/, import it at the top of this file,
- * and assign it to the relevant `image`, `beforeSrc` or `afterSrc` field.
- * Vite hashes the file for cache-busting, and a wrong path fails the build
- * rather than breaking silently in production. Aim for ~1200px on the long
- * edge; both slots crop with object-fit, so the subject wants to be centred.
- *
- *   import aboutPhoto from "./assets/about.jpg";
- *   export const aboutMe: Feature = { ..., image: aboutPhoto };
- */
-
 import aboutPhoto from "./assets/about.jpg";
 import clinicPhoto from "./assets/the-clinic.jpg";
 import skinBoostersPhoto from "./assets/skin-boosters.jpg";
@@ -123,10 +106,13 @@ export type Review = {
 
 export const site = {
   name: "Nurse Aesthetics with Steph",
-  /** TODO: confirm the practitioner's full name and post-nominals. */
-  // practitioner: "Steph Ratcliffe",
+  /** Mirrors the meta description in index.html; update both together. */
   description:
-    "Nurse-led aesthetic and clinical skincare treatments, delivered with a considered, medical approach.",
+    "Nurse-led aesthetics clinic near Bury St Edmunds, Suffolk. Anti-wrinkle treatments, dermal filler, skin boosters, polynucleotides and microneedling.",
+  /**
+   * Cloudflare Web Analytics site token
+   */
+  analyticsToken: "c99e1a398384444e817138b53a8b5b0f",
   bookingUrl: "https://portal.aestheticnursesoftware.com/book-online/31454",
   bookingLabel: "Book now",
   domain: "nurseaesthetics-steph.com",
@@ -360,11 +346,6 @@ export type Reviews = {
 
 export const reviews: Reviews = {
   heading: "Reviews",
-  // eyebrow: "In their words",
-  /** TODO: replace with the real figure once the review profile is live. */
-  // aggregate: "Rated 5 out of 5 across 40+ client reviews",
-  // ratingLabel: "Rated five out of five stars",
-  // stars: 5,
   /** TODO: Add reviews link in once google link is ready */
   // reviewsUrl: "https://example.com/reviews",
   reviewsLinkLabel: "Read all reviews",
@@ -376,7 +357,11 @@ export type FooterContent = {
   instagram: { handle: string; url: string };
   /** One entry per line. */
   address: string[];
-  /** Overrides the Google Maps link, which is otherwise built from the address. */
+  /**
+   * Unused: the address is plain text for now. Kept for when the Google Maps
+   * link is restored, at which point it overrides the URL built from
+   * `address`.
+   */
   mapsUrl?: string;
   /** Getting here and parking. One entry per paragraph; omit to hide. */
   gettingHere?: string[];
@@ -392,13 +377,6 @@ export const footer: FooterContent = {
     "Badwell Ash",
     "IP31 3FA",
   ],
-  // /** Where the address links to. Built from the address if not set. */
-  // mapsUrl:
-  //   "https://www.google.com/maps/search/?api=1&query=The+Wellness+Studio+Unit+4+Sandy+Ln+Badwell+Ash+Bury+St+Edmunds+IP31+3FA",
-  /**
-   * Getting here and parking. One entry per paragraph; omit to hide.
-   * TODO: Steph to replace with the real directions.
-   */
   gettingHere: [
     "The clinic is located inside The Wellness Studio in Badwell Ash, just 20 minutes from Bury St Edmunds.",
     "It's a private location with on-site parking directly outside the studio entrance.",
