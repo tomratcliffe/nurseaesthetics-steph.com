@@ -1,0 +1,64 @@
+/* Brand tokens. The three brand colours are fixed by existing design work;
+   paper/ink are derived neutrals that keep the palette from feeling flat. */
+:root {
+  /* Espresso and taupe are deliberately the same value: the palette reads as
+     one warm neutral, with hierarchy carried by type size and weight rather
+     than by colour. Change espresso alone to reintroduce a darker heading. */
+  --colour-espresso: #6f5d55;
+  --colour-cream: #efdcc4;
+  --colour-taupe: #6f5d55;
+  --colour-paper: #fbf8f3;
+
+  /* Tints derived from the brand colours, for hairlines and washes. */
+  --colour-rule: rgb(111 93 85 / 22%);
+  --colour-rule-strong: rgb(111 93 85 / 45%);
+  --colour-cream-wash: rgb(239 220 196 / 45%);
+
+  /* Display type is Cormorant Garamond at 600: it carries the same elegance as
+     Italiana but has real weight to it, so headings hold up at every size.
+     Italiana is left to the logo artwork itself. */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif;
+
+  --weight-display: 600;
+  --weight-label: 500;
+
+  /* Fluid display scale. Cormorant runs small for its point size, so the
+     sub-heading steps are set a little larger than they otherwise would be. */
+  --text-hero: clamp(2.75rem, 1.6rem + 5.5vw, 6rem);
+  --text-h1: clamp(2.1rem, 1.4rem + 3vw, 3.5rem);
+  --text-h2: clamp(1.6rem, 1.2rem + 1.8vw, 2.35rem);
+  --text-h3: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  --text-body: clamp(1rem, 0.97rem + 0.14vw, 1.075rem);
+  --text-heading: clamp(1.25rem, 1rem + 1.1vw, 1.85rem);
+  --text-eyebrow: clamp(1.05rem, 0.85rem + 0.9vw, 1.6rem);
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+
+  /* Headings are set in sentence case with near-normal tracking. Wide tracking
+     is reserved for the small sans labels, where it reads as considered rather
+     than as an obstacle. */
+  --tracking-display: 0.005em;
+  --tracking-eyebrow: 0.17em;
+  --tracking-eyebrow-lg: 0.1em;
+
+  --space-2xs: 0.375rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1.25rem;
+  --space-md: 2rem;
+  --space-lg: 3.25rem;
+  --space-xl: 5rem;
+  --space-section: clamp(4.5rem, 11vh, 6.5rem);
+
+  --header-height: 3.5rem;
+
+  --measure: 34rem;
+  --width-content: 68rem;
+  --width-narrow: 46rem;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration: 320ms;
+  --radius: 2px;
+  --radius-media: 1.5rem;
+}
