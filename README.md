@@ -105,17 +105,13 @@ intact. If you want it back for headings, change `--font-display` in
 
 ## Deployment
 
-The production build is served from the GitHub Pages project path
-`https://tomratcliffe.github.io/nurseaesthetics-steph.com/`, so `npm run build`
-and `npm run preview` pass `--base=/nurseaesthetics-steph.com/`. The dev server
-stays on the root, and `BrowserRouter` takes its `basename` from
-`import.meta.env.BASE_URL`, so routing follows the base automatically.
+The site is served from the custom domain `nurseaesthetics-steph.com` at the
+root, so the build needs no base path. `public/CNAME` carries the domain, and it
+is also set under Settings -> Pages.
 
-To move to the custom domain: point DNS at GitHub (the apex A records, or a
-CNAME for www), set the domain under Settings -> Pages, then drop the
-`--base` flag from both scripts so the site builds for the root again. There is
-deliberately no `public/CNAME`: committing one makes Pages adopt the domain
-before its DNS resolves, which takes the working subpath URL down with it.
+`public/404.html` derives the SPA entry point from the hostname rather than
+hardcoding it, so deep links keep working whether the site is on the custom
+domain or a `github.io` project path.
 
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and
@@ -138,3 +134,64 @@ Measured contrast: 5.88:1 on paper, 5.29:1 on the wash band, 4.66:1 on cream,
 and 4.66:1 for cream text on the espresso footer — all above the 4.5:1 WCAG AA
 threshold for normal text, but the cream pairings have little headroom, so
 re-measure if the palette is adjusted.
+
+## Link previews
+
+`index.html` carries the Open Graph and Twitter card tags, and `public/og-image.jpg`
+is the 1200x630 preview image. Those URLs are absolute because crawlers do not run
+the JavaScript that knows the base path, so they need updating alongside the
+`--base` flag when the custom domain goes live.
+
+## Images
+
+Photographs are committed at full size, and `plugins/optimise-images.ts` resizes
+and re-encodes them as part of `npm run build` — currently 49MB of originals down
+to under 3MB in `dist/`. The originals stay untouched, so the repository keeps the
+masters and only the build output is disposable.
+
+It runs on build only, so the dev server serves originals and editing a photo does
+not pay for a resize on every reload. Defaults are a 1600px long edge and JPEG
+quality 78, with a warning for anything still over 500KB; adjust them where the
+plugin is registered in `vite.config.ts`. EXIF orientation is applied on the way
+through, because resizing strips the metadata that browsers use to rotate phone
+photos upright.
+
+Files in `public/` (the favicon and `og-image.jpg`) bypass the bundler and are
+copied verbatim, so they are not optimised — keep them small by hand.
+
+## Analytics
+
+Cloudflare Web Analytics, chosen because it is cookieless — it sets no cookies
+and writes nothing to storage, so the site needs no consent banner. It is free
+and unlimited, and works on GitHub Pages without the domain being proxied
+through Cloudflare.
+
+It is **inert until configured**. `site.analyticsToken` in `src/content.ts` is
+empty, so nothing loads and no request is made. To switch it on:
+
+1. In the Cloudflare dashboard, go to Web Analytics and add a site.
+2. Enter the hostname the site is served from: `nurseaesthetics-steph.com`.
+3. Copy the token out of *Manage site* and paste it into `site.analyticsToken`.
+
+The token is not a secret: it ships in the page source of every site that uses
+Cloudflare Web Analytics, so committing it is correct.
+
+> **Hostname matching is postfix-based.** A site registered as
+> `nurseaesthetics-steph.com` accepts beacons from that domain and its
+> subdomains, and rejects everything else — including `tomratcliffe.github.io`.
+> If the site is ever served from the `github.io` URL again, analytics records
+> nothing, with no error anywhere; the dashboard simply stays empty.
+
+Route changes need no code: the beacon detects client-side navigation itself
+(Soft Navigations API, Navigation API, or by patching `history.pushState`) and
+reads `window.location`, so it stays correct under the router's `basename`.
+
+Analytics does not run on the dev server. `src/components/Analytics.tsx` gates
+on `import.meta.env.MODE`, deliberately **not** `import.meta.env.PROD` — Vite
+derives `PROD` from `NODE_ENV`, so on a machine with `NODE_ENV=development` a
+production build reports `PROD` as `false` and would ship with analytics
+silently disabled.
+
+Cloudflare Web Analytics has no custom-event API, so button clicks such as
+*Book now* cannot be counted. If conversion tracking is wanted later, that is
+the point to reconsider the provider; `Analytics.tsx` is the only file affected.
