@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --base=/nurseaesthetics-steph.com/",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview --base=/nurseaesthetics-steph.com/"
   },
   "dependencies": {
     "react": "^19.2.8",

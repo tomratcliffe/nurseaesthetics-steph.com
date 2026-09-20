@@ -105,6 +105,19 @@ intact. If you want it back for headings, change `--font-display` in
 
 ## Deployment
 
+The production build is served from the GitHub Pages project path
+`https://tomratcliffe.github.io/nurseaesthetics-steph.com/`, so `npm run build`
+and `npm run preview` pass `--base=/nurseaesthetics-steph.com/`. The dev server
+stays on the root, and `BrowserRouter` takes its `basename` from
+`import.meta.env.BASE_URL`, so routing follows the base automatically.
+
+To move to the custom domain: point DNS at GitHub (the apex A records, or a
+CNAME for www), set the domain under Settings -> Pages, then drop the
+`--base` flag from both scripts so the site builds for the root again. There is
+deliberately no `public/CNAME`: committing one makes Pages adopt the domain
+before its DNS resolves, which takes the working subpath URL down with it.
+
+
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and
 publishes `dist/` to GitHub Pages. In the repo settings, **Pages → Source** must
 be set to **GitHub Actions**.

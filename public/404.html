@@ -7,8 +7,17 @@
       // GitHub Pages has no server-side rewrite, so a direct hit on /treatments
       // lands here. Stash the requested URL and bounce to the SPA entry point,
       // where the snippet in index.html restores it before React mounts.
-      sessionStorage.redirect = location.href;
-      location.replace(location.origin);
+      //
+      // That entry point is the site root on a custom domain, but /<repo>/ on a
+      // github.io project page. This file is in public/, so Vite never rewrites
+      // it and the base cannot be injected — hence deriving it from the
+      // hostname, which keeps working after the switch to the custom domain.
+      (function () {
+        var projectPage = location.hostname.endsWith('.github.io');
+        var base = projectPage ? '/' + location.pathname.split('/')[1] + '/' : '/';
+        sessionStorage.redirect = location.href;
+        location.replace(location.origin + base);
+      })();
     </script>
   </head>
   <body></body>
